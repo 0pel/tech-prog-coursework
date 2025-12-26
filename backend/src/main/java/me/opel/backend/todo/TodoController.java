@@ -37,6 +37,7 @@ public class TodoController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTodo(@PathVariable long id) {
         service.deleteTodo(id);
     }

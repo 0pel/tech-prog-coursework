@@ -53,9 +53,4 @@ public class TodoService {
         return repository.findAllByOrderByCreatedAtDesc().stream().map(mapper::toResponse).toList();
     }
 
-    public List<TodoResponse> getAllTodosByCompleted(boolean completed) {
-        return repository.findAllByCompletedOrderByCreatedAtDesc(completed).stream().map(mapper::toResponse).toList();
-    }
-
-
 }
