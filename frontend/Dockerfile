@@ -7,6 +7,10 @@ COPY . .
 
 FROM base AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
 RUN pnpm run build
 
 FROM base
@@ -15,4 +19,4 @@ COPY --from=build /app/dist /app/dist
 COPY --from=build /app/package.json /app/package.json
 
 EXPOSE 8000
-ENTRYPOINT [ "pnpm", "dev" ]
+ENTRYPOINT [ "pnpm", "start" ]

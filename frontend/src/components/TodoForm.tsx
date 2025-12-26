@@ -1,35 +1,35 @@
-import {useState} from 'react';
-import {Button} from './ui/button';
-import {Input} from './ui/input';
-import {Textarea} from './ui/textarea';
-import {Card, CardContent, CardHeader, CardTitle} from './ui/card';
+import { Button } from "@/components/ui/button.tsx"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx"
+import { Input } from "@/components/ui/input.tsx"
+import { Textarea } from "@/components/ui/textarea.tsx"
+import { useState } from "react"
 
 interface TodoFormProps {
-    onSubmit: (title: string, description: string) => void;
-    onCancel?: () => void;
-    initialTitle?: string;
-    initialDescription?: string;
-    submitLabel?: string;
+    onSubmit: (title: string, description: string) => void
+    onCancel?: () => void
+    initialTitle?: string
+    initialDescription?: string
+    submitLabel?: string
 }
 
 export function TodoForm({
-                             onSubmit,
-                             onCancel,
-                             initialTitle = '',
-                             initialDescription = '',
-                             submitLabel = 'Add Todo',
-                         }: Readonly<TodoFormProps>) {
-    const [title, setTitle] = useState(initialTitle);
-    const [description, setDescription] = useState(initialDescription);
+    onSubmit,
+    onCancel,
+    initialTitle = "",
+    initialDescription = "",
+    submitLabel = "Add Todo",
+}: Readonly<TodoFormProps>) {
+    const [title, setTitle] = useState(initialTitle)
+    const [description, setDescription] = useState(initialDescription)
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault()
         if (title.trim()) {
-            onSubmit(title, description);
-            setTitle('');
-            setDescription('');
+            onSubmit(title, description)
+            setTitle("")
+            setDescription("")
         }
-    };
+    }
 
     return (
         <Card>
@@ -43,7 +43,7 @@ export function TodoForm({
                             type="text"
                             placeholder="Todo title..."
                             value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            onChange={e => setTitle(e.target.value)}
                             required
                         />
                     </div>
@@ -51,7 +51,7 @@ export function TodoForm({
                         <Textarea
                             placeholder="Description (optional)..."
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={e => setDescription(e.target.value)}
                             rows={3}
                         />
                     </div>
@@ -66,5 +66,5 @@ export function TodoForm({
                 </form>
             </CardContent>
         </Card>
-    );
+    )
 }
