@@ -1,0 +1,32 @@
+networks:
+  dev:
+
+services:
+  coursework-pg:
+    container_name: coursework-db
+    extends:
+      service: coursework-pg
+      file: backend/docker-compose.yaml
+    networks:
+      dev:
+  backend:
+    container_name: coursework-backend
+    extends:
+      service: coursework-app
+      file: backend/docker-compose.yaml
+    networks:
+      dev:
+
+  frontend:
+    container_name: coursework-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      dev:
+
+
+volumes:
+  coursework_data:

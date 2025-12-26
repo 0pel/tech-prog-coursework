@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: backend
+  config:
+    import:
+      - optional:file:backend/.env[.properties]
+      - optional:file:.env.docker[.properties]
+  datasource:
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://${DB_HOST}/${DB_NAME}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+
+allowed:
+  origins: ${ALLOWED_ORIGINS:http://localhost:8000,http://127.0.0.1:8000}
