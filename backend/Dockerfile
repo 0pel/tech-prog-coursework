@@ -9,7 +9,7 @@ COPY --chown=gradle:gradle build.gradle.kts settings.gradle.kts ./
 # Step 2: Download dependencies (go-offline)
 # We use a cache mount to persist the Gradle home directory across builds
 RUN --mount=type=cache,target=/home/gradle/.gradle \
-    gradle build --no-daemon --quiet
+    gradle build --no-daemon --quiet -x bootJar
 
 # Step 3: Copy the actual source code
 COPY --chown=gradle:gradle . .
@@ -17,7 +17,7 @@ COPY --chown=gradle:gradle . .
 # Step 4: Build the application
 # The --mount here ensures we reuse the dependencies downloaded in Step 2
 RUN --mount=type=cache,target=/home/gradle/.gradle \
-    gradle build --no-daemon -x test --quiet
+    gradle build --no-daemon --quiet -x test
 
 # Stage 2: Runtime stage
 FROM eclipse-temurin:25-jre-alpine

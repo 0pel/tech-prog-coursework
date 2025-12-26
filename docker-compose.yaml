@@ -1,32 +1,45 @@
-networks:
-  dev:
-
 services:
   coursework-pg:
     container_name: coursework-db
-    extends:
-      service: coursework-pg
-      file: backend/docker-compose.yaml
-    networks:
-      dev:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - backend_data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "127.0.0.1:${DB_PORT}:5432"
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   backend:
     container_name: coursework-backend
-    extends:
-      service: coursework-app
-      file: backend/docker-compose.yaml
-    networks:
-      dev:
+    build:
+      context:  backend
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      coursework-pg:
+        condition: service_healthy
 
   frontend:
     container_name: coursework-frontend
     build:
       context: frontend
-      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     ports:
       - "8000:8000"
-    networks:
-      dev:
 
 
 volumes:
-  coursework_data:
+  backend_data:

@@ -1,10 +1,6 @@
 spring:
   application:
     name: backend
-  config:
-    import:
-      - optional:file:backend/.env[.properties]
-      - optional:file:.env.docker[.properties]
   datasource:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
