@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM gradle:9.2.1-alpine AS build
+FROM gradle:9.3.1-alpine AS build
 WORKDIR /home/gradle/src
 
 # Step 1: Copy only the files needed to download dependencies
@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/home/gradle/.gradle \
     gradle build --no-daemon --quiet -x bootJar
 
 # Step 3: Copy the actual source code
-COPY --chown=gradle:gradle . .
+COPY --chown=gradle:gradle src src
 
 # Step 4: Build the application
 # The --mount here ensures we reuse the dependencies downloaded in Step 2
