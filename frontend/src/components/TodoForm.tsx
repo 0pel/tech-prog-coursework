@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button.tsx"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx"
-import { Input } from "@/components/ui/input.tsx"
-import { Textarea } from "@/components/ui/textarea.tsx"
-import { useState } from "react"
+import {Button} from "@/components/ui/button.tsx"
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx"
+import {Input} from "@/components/ui/input.tsx"
+import {Textarea} from "@/components/ui/textarea.tsx"
+import React, {useState} from "react"
 
 interface TodoFormProps {
     onSubmit: (title: string, description: string) => void
@@ -13,12 +13,12 @@ interface TodoFormProps {
 }
 
 export function TodoForm({
-    onSubmit,
-    onCancel,
-    initialTitle = "",
-    initialDescription = "",
-    submitLabel = "Add Todo",
-}: Readonly<TodoFormProps>) {
+                             onSubmit,
+                             onCancel,
+                             initialTitle = "",
+                             initialDescription = "",
+                             submitLabel = "Add Todo",
+                         }: Readonly<TodoFormProps>) {
     const [title, setTitle] = useState(initialTitle)
     const [description, setDescription] = useState(initialDescription)
 

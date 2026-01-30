@@ -1,8 +1,8 @@
-import { TodoForm } from "@/components/TodoForm"
-import { TodoList } from "@/components/TodoList"
-import { apiService, type Todo } from "@/services/api"
-import { CheckCircle2 } from "lucide-react"
-import { useEffect, useState } from "react"
+import {TodoForm} from "@/components/TodoForm"
+import {TodoList} from "@/components/TodoList"
+import {apiService, type Todo} from "@/services/api"
+import {CheckCircle2} from "lucide-react"
+import {useEffect, useState} from "react"
 
 function App() {
     const [todos, setTodos] = useState<Todo[]>([])
@@ -86,20 +86,21 @@ function App() {
             <div className="mx-auto max-w-4xl">
                 <div className="mb-8 text-center">
                     <div className="mb-2 flex items-center justify-center gap-2">
-                        <CheckCircle2 className="h-10 w-10 text-indigo-600" />
+                        <CheckCircle2 className="h-10 w-10 text-indigo-600"/>
                         <h1 className="text-4xl font-bold text-gray-900">Todo App</h1>
                     </div>
                     <p className="text-gray-600">Stay organized and productive</p>
                 </div>
 
                 {error && (
-                    <div className="bg-destructive/10 border-destructive text-destructive mb-6 rounded-lg border px-4 py-3">
+                    <div
+                        className="bg-destructive/10 border-destructive text-destructive mb-6 rounded-lg border px-4 py-3">
                         {error}
                     </div>
                 )}
 
                 <div className="mb-8">
-                    <TodoForm onSubmit={handleCreateTodo} submitLabel="Add Todo" />
+                    <TodoForm onSubmit={handleCreateTodo} submitLabel="Add Todo"/>
                 </div>
 
                 {loading ? (
