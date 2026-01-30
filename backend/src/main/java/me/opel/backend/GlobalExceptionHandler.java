@@ -208,7 +208,7 @@ public class GlobalExceptionHandler {
                             .timestamp(LocalDateTime.now())
                             .status(HttpStatus.CONFLICT.value())
                             .error(HttpStatus.CONFLICT.getReasonPhrase())
-                            .message("Data integrity violation.  The operation conflicts with existing data")
+                            .message("Data integrity violation. The operation conflicts with existing data")
                             .path(request.getRequestURI())
                             .build();
     }
